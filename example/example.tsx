@@ -7,6 +7,8 @@ import {Component} from 'angular2/core';
 
 import * as ng2jsx from '../lib/ng2jsx';
 
+import {data} from './example-data'
+
 @Component({
   selector: Component.toString(),
   inputs: ['val'],
@@ -37,13 +39,41 @@ class JsxContainer {
     return (
       <div class="whateva">
         <JsxComponent
-          val={'test'}
+          val={data.val}
+        />
+        <JsxComponent
+          val={data.get_name_1()}
+        />
+        <JsxComponent
+          val={data.get_name_2()}
+        />
+        <JsxComponent
+          val={data.get_name_3('Captain Kirk')}
         />
       </div>
     );
   }
 }
 
-
 console.log(JsxContainer.tpl.toString());
 console.log(JsxContainer.tpl.directives);
+
+/* ********************************************************
+ * > npm run-script webpack
+ * > npm run-script example
+ *
+ * > node ./build/example.js
+ *     <div class="whateva">
+ *       <jsx-component val="John Smith"></jsx-component>
+ *       <jsx-component val="John Smith"></jsx-component>
+ *       <jsx-component val="Jane Doe"></jsx-component>
+ *       <jsx-component val="Captain Kirk"></jsx-component>
+ *     </div>
+ *
+ * [
+ *   [ { [Function: JsxComponent] toString: [Function] } ],
+ *   [ { [Function: JsxComponent] toString: [Function] } ],
+ *   [ { [Function: JsxComponent] toString: [Function] } ],
+ *   [ { [Function: JsxComponent] toString: [Function] } ]
+ * ]
+ ******************************************************** */
